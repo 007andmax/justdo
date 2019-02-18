@@ -1,0 +1,114 @@
+@font-face {
+	font-family: "SF Pro Text, Regular";
+	src: url("../fonts/SFUIText-Regular.eot?") format("eot"),
+		 url("../fonts/SFUIText-Regular.woff") format("woff"),
+		 url("../fonts/SFUIText-Regular.ttf") format("truetype");
+}
+@font-face {
+	font-family: "SF Pro Text, Medium";
+	src: url("../fonts/SFUIText-Medium.eot?") format("eot"),
+		 url("../fonts/SFUIText-Medium.woff") format("woff"),
+		 url("../fonts/SFUIText-Medium.ttf") format("truetype");
+}
+a,p,h3,h4 {
+  letter-spacing: 0.8px;
+}
+form {
+  .form-group {
+    position: relative;
+    input {
+      display: block;
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #BBBBC7;
+      padding: 12px 0px;
+      text-align: left;
+      line-height: 24px;
+      font-size: 16px;
+      color: #212020;
+      font-family: 'SF Pro Text, Regular';
+      margin: 0px 0px 24px 0px;
+      &::placeholder {
+        text-align: left;
+        line-height: 24px;
+        color: #BBBBC7;
+        font-size: 16px;
+      }
+    }
+    .visible-field {
+      display: none;
+      background: url("/assets/img/ic_eye_visible.svg") no-repeat;
+      cursor: pointer;
+      width: 20px;
+      height: 16px;
+      position: absolute;
+      bottom: 10px;
+      right: 5px;
+    }
+    .hide-value {
+      bottom: 13px;
+      background: url("/assets/img/ic_eye_unvisible.svg") no-repeat;
+    }
+    .invalid-feedback {
+      position: absolute;
+      bottom: -28px;
+      right: 0px;
+      P {
+        font-size: 12px;
+        color: #F24A3C;
+        margin: 0px;
+        text-align: right;
+      }
+    }
+  }
+  button {
+    display: block;
+    width: 257px;
+    height: 47px;
+    line-height: 47px;
+    border-radius: 26px;
+    border: none;
+    cursor: pointer;
+    background: #56ccf2; /* Old browsers */
+    background: -moz-linear-gradient(left, #56ccf2 0%, #2f80ed 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #56ccf2 0%,#2f80ed 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #56ccf2 0%,#2f80ed 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#56ccf2', endColorstr='#2f80ed',GradientType=1 ); /* IE6-9 */
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 18px;
+    font-family: "SF Pro Text, Medium";
+    margin: 72px auto 35px auto;
+  }
+}
+a {
+  color: #2F80ED;
+  text-decoration: underline;
+
+}
+.form-fon {
+  display: block;
+  width: 423px;
+  height: auto;
+  margin: 123px auto 0px auto;
+  h3
+  {
+    font-size: 24px;
+    color: #000000;
+    text-align: center;
+    margin: 0px 0px 62px 0px;
+    line-height: 27px;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+
+  }
+  p {
+
+    color: #BBBBC7;
+    text-align: center;
+    font-size: 16px;
+    font-family: "SF Pro Text, Medium";
+    line-height: 24px;
+  }
+
+}

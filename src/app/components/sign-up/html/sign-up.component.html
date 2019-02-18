@@ -1,0 +1,36 @@
+<div class="form-fon sign-up">
+  <h3>Sign Up</h3>
+  <div class="sign-up-form">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+      <input type="text"  formControlName="email"  placeholder="E-mail" required />
+      <div *ngIf="submitted && registerForm.controls['email'].errors" class="invalid-feedback">
+          <p *ngIf="registerForm.controls['email'].errors.required">Email is required</p>
+          <p *ngIf="registerForm.controls['email'].errors.email">This address does not exist</p>
+      </div>
+        </div>
+      <div class="form-group">
+      <input type="password" formControlName="password" placeholder="Password" required (keyup)="checkField($event)" />
+      <div class="visible-field" (click)="toogleField($event)"></div>
+      <div *ngIf="submitted && registerForm.controls['password'].errors" class="invalid-feedback">
+          <p *ngIf="registerForm.controls['password'].errors.required">Password is required</p>
+          <p *ngIf="registerForm.controls['password'].errors.minlength">The password must contain capital letters</p>
+      </div>
+      </div>
+      <div class="form-group">
+      <input type="password" formControlName="confirmPassword" placeholder="Confirm password" required  (keyup)="checkField($event)"/>
+      <div class="visible-field" (click)="toogleField($event)"></div>
+      <div *ngIf="submitted && registerForm.controls['confirmPassword'].errors" class="invalid-feedback">
+          <p *ngIf="registerForm.controls['confirmPassword'].errors.required">Confirm Password is required</p>
+          <p *ngIf="registerForm.controls['confirmPassword'].errors.mustMatch">Password do not match</p>
+      </div>
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>I already have an account. <a routerLink="/sign-in" routerLinkActive="active">Sign In</a></p>
+  </div>
+  <div class="police">
+    <p>By accessing your account, you agree to our</p>
+    <p><a routerLink="/terms-conditions" routerLinkActive="active">Terms conditions</a> and <a routerLink="/privacy-policy" routerLinkActive="active">Privacy Policy</a></p>
+  </div>
+</div>
