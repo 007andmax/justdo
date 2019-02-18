@@ -1,27 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import {Actions} from './services/actions.service';
+import {ActionsService} from './services/actions.service';
+import { reqSignUp } from 'src/app/services/req/req-sign-up';
+import { resSignUp } from 'src/app/services/res/res-sign-up';
+import { Router } from '@angular/router';
+import { FormService } from 'src/app/services/form-service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: 'html//sign-up.component.html',
   styleUrls: ['css/sign-up.component.scss'],
-  providers:[Actions]
+  providers:[ActionsService]
 })
 export class SignUpComponent  implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private actions: Actions) { }
+  constructor(private formBuilder: FormBuilder, private actions: ActionsService, private router: Router, private form: FormService) { }
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          email: ['', [Validators.required, Validators.email]],
-          password: ['', [Validators.required, Validators.minLength(6)]],
+          email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
+          password: ['', [Validators.required, Validators.minLength(8)]],
           confirmPassword: ['', Validators.required]
       }, {
-          validator: this.actions.MustMatch('password', 'confirmPassword')
+          validator: this.form.MustMatch('password', 'confirmPassword')
       });
 
   }
@@ -55,7 +59,9 @@ export class SignUpComponent  implements OnInit {
       if (this.registerForm.invalid) {
           return;
       }
-
-      alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
+      this.actions.SignUp(new reqSignUp(this.registerForm.value.email,this.registerForm.value.password)).then((res:resSignUp) => {
+        console.log('res', res);
+        this.router.navigate(['/sign-in']);
+      });
   }
 }

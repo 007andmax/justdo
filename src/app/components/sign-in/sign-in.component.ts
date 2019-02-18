@@ -4,6 +4,7 @@ import { FormService } from 'src/app/services/form-service';
 import { ActionsService } from './services/actions.service';
 import { reqSignIn } from 'src/app/services/req/req-sign-in';
 import { resSignIn } from 'src/app/services/res/res-sign-in';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,11 +18,12 @@ export class SignInComponent  implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private form: FormService, private actions: ActionsService) { }
+
+  constructor(private formBuilder: FormBuilder, private form: FormService, private actions: ActionsService,   private router: Router) { }
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          email: ['', [ Validators.required, Validators.pattern('[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}')]],
+          email: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
           password: ['', [Validators.required, Validators.minLength(8)]]
       });
   }
@@ -54,6 +56,7 @@ export class SignInComponent  implements OnInit {
       }
     this.actions.SignIn(new reqSignIn(this.registerForm.value.email,this.registerForm.value.password)).then((res:resSignIn) => {
       console.log('res', res);
+      this.router.navigate(['/']);
     });
   }
 }

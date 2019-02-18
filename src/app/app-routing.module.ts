@@ -6,6 +6,7 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

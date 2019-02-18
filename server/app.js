@@ -24,6 +24,6 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", indexRoutes);
-app.use(express.static(path.resolve(__dirname, "..", "dist")));
- app.get(/.*/, (req, res) => {res.sendFile(path.resolve(__dirname, "..", "dist", "index.html"));});
+app.use(express.static(path.resolve(__dirname, "..", "dist/my-app")));
+ app.get(/.*/, (req, res) => {res.sendFile(path.resolve(__dirname, "..", "dist/my-app", "index.html"));});
 app.listen(3000);
