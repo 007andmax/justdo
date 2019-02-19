@@ -72,20 +72,9 @@ router.post("/sign-up", function (req, res, next) {
 
  router.post("/reset-password", function (req, res, next) {
 
-  if (req.body.email && req.body.password)
+  if (req.body.email && req.body.password && req.body.code)
   {
-    promise = User.findOne({email:req.body.email}).exec();
-    promise.then((data,error) => {
-    if (data) {
-      data.password = req.body.password;
-
-      data.save();
-      res.send({ result: true });
-    } else {
-      res.status(403).send({ result: false });
-    }
-
-  });
+    DB.checkForgotPassword(req.body.email,req.body.code,req.body.password,res);
   } else {
    res.status(403).send({ result: false });
   }

@@ -6,6 +6,8 @@ import { resSignUp } from './res/res-sign-up';
 import { reqSignUp } from './req/req-sign-up';
 import { reqForgotPassword } from './req/req-forgot-password';
 import { resForgotPassword } from './res/res-forgot-password';
+import { reqResetPassword } from './req/req-reset-password';
+import { resResetPassword } from './res/res-reset-password';
 
 @Injectable()
 export class HttpService {
@@ -50,7 +52,20 @@ export class HttpService {
         .then((res: resForgotPassword) => {
           resolve(res);
         },err => {
-          alert('Такой пользователь уже есть');
+          alert('Неверный имейл');
+        });
+    });
+  }
+  resetPassword(data: reqResetPassword) {
+
+    return new Promise((resolve, reject) => {
+      this.http
+        .post('/reset-password', data,{ headers: this.httpHeaders})
+        .toPromise()
+        .then((res: resResetPassword) => {
+          resolve(res);
+        },err => {
+          alert('Неверный код');
         });
     });
   }

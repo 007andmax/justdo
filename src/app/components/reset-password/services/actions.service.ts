@@ -1,24 +1,13 @@
-import { FormGroup } from '@angular/forms';
 
-export class Actions {
-  constructor () {
-  }
-  public MustMatch(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-        const control = formGroup.controls[controlName];
-        const matchingControl = formGroup.controls[matchingControlName];
+import { reqResetPassword } from 'src/app/services/req/req-reset-password';
+import { Injectable } from '@angular/core';
+import { HttpService } from 'src/app/services/http.service';
 
-        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            // return if another validator has already found an error on the matchingControl
-            return;
-        }
+@Injectable()
+export class ActionsService {
+  constructor(private http: HttpService) {}
+ public resetPassword (data:reqResetPassword) {
+   return this.http.resetPassword(data);
 
-        // set error on matchingControl if validation fails
-        if (control.value !== matchingControl.value) {
-            matchingControl.setErrors({ mustMatch: true });
-        } else {
-            matchingControl.setErrors(null);
-        }
-    }
-}
+ }
 }

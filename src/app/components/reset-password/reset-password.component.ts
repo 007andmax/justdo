@@ -1,26 +1,30 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Actions } from './services/actions.service';
+import { ActionsService } from './services/actions.service';
+import { FormService } from 'src/app/services/form-service';
+import { reqResetPassword } from 'src/app/services/req/req-reset-password';
+import { resResetPassword } from 'src/app/services/res/res-reset-password';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: 'html/reset-password.component.html',
   styleUrls: ['css/reset-password.component.scss'],
-  providers:[Actions]
+  providers:[ActionsService]
 })
 export class ResetPasswordComponent {
   registerForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private actions: Actions) { }
+  constructor(private formBuilder: FormBuilder, private actions: ActionsService, private form: FormService, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      code: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      code: ['', [Validators.required,Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required]
   }, {
-      validator: this.actions.MustMatch('password', 'confirmPassword')
+      validator: this.form.MustMatch('password', 'confirmPassword')
   });
   }
 
@@ -51,10 +55,13 @@ export class ResetPasswordComponent {
       this.submitted = true;
 
       // stop here if form is invalid
-      if (this.registerForm.invalid) {
+      if (this.registerForm.invalid && localStorage.getItem('email')) {
           return;
       }
+      this.actions.resetPassword(new reqResetPassword(this.registerForm.value.code,localStorage.getItem('email'),this.registerForm.value.password)).then((res:resResetPassword) => {
+        console.log('res', res);
+        this.router.navigate(['/sign-in']);
+      });
 
-      alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
   }
 }

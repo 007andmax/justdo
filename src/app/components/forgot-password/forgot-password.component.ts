@@ -33,6 +33,7 @@ export class ForgotPasswordComponent implements OnInit  {
 
     this.actions.forgotPassword(new reqForgotPassword(this.registerForm.value.email)).then((res:resForgotPassword) => {
       console.log('res', res);
+      localStorage.setItem('email',this.registerForm.value.email);
       this.router.navigate(['/reset-password']);
     });
 }

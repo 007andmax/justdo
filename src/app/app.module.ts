@@ -14,7 +14,10 @@ import { FormService } from './services/form-service';
 import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/home/home.component';
+import {enableProdMode} from '@angular/core';
 
+enableProdMode();
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     SignInComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

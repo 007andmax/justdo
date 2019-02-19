@@ -5,16 +5,15 @@
         <div class="form-group">
       <input type="text"  formControlName="email"  placeholder="E-mail" required />
       <div *ngIf="submitted && registerForm.controls['email'].errors" class="invalid-feedback">
-          <p *ngIf="registerForm.controls['email'].errors.required">Email is required</p>
-          <p *ngIf="registerForm.controls['email'].errors.email">This address does not exist</p>
+        <p *ngIf="registerForm.controls['email'].errors.pattern">This address does not exist</p>
       </div>
         </div>
       <div class="form-group">
       <input type="password" formControlName="password" placeholder="Password" required (keyup)="checkField($event)" />
       <div class="visible-field" (click)="toogleField($event)"></div>
       <div *ngIf="submitted && registerForm.controls['password'].errors" class="invalid-feedback">
-          <p *ngIf="registerForm.controls['password'].errors.required">Password is required</p>
-          <p *ngIf="registerForm.controls['password'].errors.minlength">The password must contain capital letters</p>
+        <p *ngIf="registerForm.controls['password'].errors.required">Password is required</p>
+        <p *ngIf="registerForm.controls['password'].errors.minlength">Password must be at least 8 characters long</p>
       </div>
       </div>
       <div class="form-group">
